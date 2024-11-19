@@ -3,10 +3,6 @@ import React from "react";
 const Footer: React.FC = () => {
     return (
         <footer className="bg-gray-800 text-white text-center py-4 space-y-2">
-            <p>2024 o7.gg © All rights reserved.</p>
-            <p>
-                Made by <a href="https://kos.gg" className="text-blue-400 hover:underline">kos.gg</a>
-            </p>
             <p>
                 <a
                     href="https://ko-fi.com/Q5Q815ZBU4"
@@ -21,6 +17,10 @@ const Footer: React.FC = () => {
                     />
                     <span>Fuel up the squad with sushi</span>
                 </a>
+            </p>
+            <p>2024 o7.gg © All rights reserved.</p>
+            <p>
+                Made by <a href="https://kos.gg" className="text-blue-400 hover:underline">kos.gg</a>
             </p>
         </footer>
     );

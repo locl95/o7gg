@@ -1,13 +1,16 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'LifeCraft'; /* Your custom font name */
+    src: url('../assets/fonts/LifeCraft_Font.ttf') format('truetype'); /* Adjust path as needed */
+    font-weight: normal; /* Define weights if applicable */
+    font-style: normal; /* Define styles if applicable */
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@layer utilities {
+    .text-stroke {
+        -webkit-text-stroke: 1px darkblue;
+    }
 }

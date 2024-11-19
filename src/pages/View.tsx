@@ -266,8 +266,16 @@ const View: React.FC = () => {
 
     return (
         <div className="flex flex-col min-h-screen bg-gray-200">
-            <div className="flex-grow">
-                {viewName && <WoWTitle title={viewName}/>}
+            <div className="grid-cols-3">
+                {viewName && (
+                    <div className="flex items-center justify-between p-2">
+                        <WoWTitle title={viewName} />
+                        <img
+                            src="/icons/kosgg.jpeg"
+                            alt="kosgg"
+                        />
+                    </div>
+                )}
                 <CharacterTable characters={characters}></CharacterTable>
             </div>
             <Footer/>

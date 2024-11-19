@@ -7,11 +7,11 @@ interface WowHeadTalentsProps {
 
 export const WowHeadTalents: React.FC<WowHeadTalentsProps> = ({char}) => {
     return (
-        <div className="relative w-full h-[600px]">
+        <div className="relative w-full h-[550px]">
             <iframe
                 src={`https://www.wowhead.com/classic/en/talent-calc/embed/${char.characterClass.toLowerCase()}/${char.specializations.wowHeadEmbeddedTalents}`}
                 title="WoW Talent Calculator"
-                className="w-full h-full border-0"
+                className="w-full h-full border-0 pointer-events-auto"
                 allowFullScreen
             />
         </div>

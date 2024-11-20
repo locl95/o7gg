@@ -181,6 +181,7 @@ export class Character {
     readonly gender: string;
     readonly race: string;
     readonly realm: string;
+    readonly region: string;
     readonly experience: number;
     readonly faction: string
     readonly items: WowItem[]
@@ -201,6 +202,7 @@ export class Character {
         gender: string,
         race: string,
         realm: string,
+        region: string,
         experience: number,
         faction: string,
         items: WowItem[],
@@ -220,6 +222,7 @@ export class Character {
         this.gender = gender;
         this.race = race;
         this.realm = realm;
+        this.region = region;
         this.experience = experience;
         this.faction = faction;
         this.items = items;

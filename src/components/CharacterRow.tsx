@@ -47,7 +47,7 @@ const CharacterRow: React.FC<CharacterRowProps> = ({char, index}) => {
                                 )}
                             </div>
                             {/* Realm */}
-                            <span className="text-sm text-gray-500">{char.realm}</span>
+                            <span className="text-sm text-gray-500">({char.region.toUpperCase()}) {char.realm}</span>
                         </div>
 
                         {/* Right side: Icons */}

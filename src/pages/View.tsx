@@ -237,9 +237,14 @@ const View: React.FC = () => {
     const {viewId} = useParams();
 
     const LoadingSpinner = () => (
-        <div className="flex justify-center items-center">
-            <div
-                className="w-16 h-16 border-4 border-t-4 border-gray-200 border-solid rounded-full animate-spin border-t-blue-500"></div>
+        <div className="flex justify-center items-center relative">
+            {/* Spinner */}
+            <div className="w-64 h-64 border-8 border-t-8 border-gray-200 border-solid rounded-full animate-spin border-t-red-500"></div>
+
+            {/* Spinning text */}
+            <div className="absolute text-center text-2xl text-red-500 font-bold animate-[spin_3s_linear_infinite]">
+                o7
+            </div>
         </div>
     );
 
@@ -261,15 +266,25 @@ const View: React.FC = () => {
     }, [viewId]);
 
     if (loading) {
-        return <LoadingSpinner/>;
+        return (
+            <div className="flex flex-col min-h-screen bg-gray-200">
+                {/* Main content area should grow */}
+                <div className="flex-grow flex items-center justify-center">
+                    <LoadingSpinner />
+                </div>
+
+                {/* Footer always at the bottom */}
+                <Footer />
+            </div>
+        );
     }
 
     return (
         <div className="flex flex-col min-h-screen bg-gray-200">
-            <div className="grid-cols-3">
+            <div className="grid-cols-3 flex-grow">
                 {viewName && (
                     <div className="flex items-center justify-between p-2">
-                        <WoWTitle title={viewName} />
+                        <WoWTitle title={viewName}/>
                         <img
                             src="/icons/kosgg.jpeg"
                             alt="kosgg"

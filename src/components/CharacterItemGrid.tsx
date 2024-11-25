@@ -31,7 +31,6 @@ const CharacterItemSlot: React.FC<CharacterItemSlotProps> = ({item, fallback}) =
             <img
                 src={item ? item.icon : `/icons/gear/${fallback}.webp`}
                 alt={item ? item.name : fallback}
-                title={item ? item.name : undefined}
                 className={`w-[56px] h-[56px] object-contain rounded-lg shadow-sm border-4 ${borderColor}`}
             />
         </div>

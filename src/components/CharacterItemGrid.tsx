@@ -27,12 +27,19 @@ const CharacterItemSlot: React.FC<CharacterItemSlotProps> = ({item, fallback}) =
 
 
     return (
-        <div className="flex justify-center items-center">
-            <img
-                src={item ? item.icon : `/icons/gear/${fallback}.webp`}
-                alt={item ? item.name : fallback}
-                className={`w-[56px] h-[56px] object-contain rounded-lg shadow-sm border-4 ${borderColor}`}
-            />
+        <div className="relative flex justify-center">
+            <div className="group">
+                <img
+                    src={item ? item.icon : `/icons/gear/${fallback}.webp`}
+                    alt={item ? item.name : fallback}
+                    className={`w-[56px] h-[56px] object-contain rounded-lg shadow-sm border-4 ${borderColor}`}
+                />
+                { item && 
+                    <div className={`absolute bottom-full left hidden px-2 py-1 bg-black text-white rounded group-hover:block whitespace-nowrap `}>
+                        {item ? item.name : undefined}
+                    </div>
+                }
+            </div>
         </div>
     )
 }

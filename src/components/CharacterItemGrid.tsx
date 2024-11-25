@@ -31,6 +31,7 @@ const CharacterItemSlot: React.FC<CharacterItemSlotProps> = ({item, fallback}) =
             <img
                 src={item ? item.icon : `/icons/gear/${fallback}.webp`}
                 alt={item ? item.name : fallback}
+                title={item ? item.name : undefined}
                 className={`w-[56px] h-[56px] object-contain rounded-lg shadow-sm border-4 ${borderColor}`}
             />
         </div>
@@ -60,7 +61,7 @@ const CharacterItemGrid: React.FC<CharacterItemGridProps> = ({char}) => {
                     <CharacterItemSlot item={char.items.find(item => item.slot === "Offhand")} fallback={"offhand"}/>
                 </div>
 
-                <div className="col-span-2 grid grid-rows-3 grid-cols-2 gap-2">
+                <div className="col-span-2 grid grid-cols-2 gap-2">
                     <CharacterCoreStats stats={char.stats}/>
                     <CharacterOffensiveStats stats={char.stats}/>
                     <CharacterDefensiveStats stats={char.stats}/>

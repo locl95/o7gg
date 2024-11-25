@@ -63,12 +63,10 @@ export const CharacterDefensiveStats: React.FC<CharacterStatsProps> = ({stats}) 
                 <span>Defensive</span>
             </div>
             <div className="space-y-2">
-                <div className="table w-full">
                     <StatRow label={"Defense"} value={stats.defense}/>
                     <StatRow label={"Armor"} value={stats.armor}/>
                     <StatRow label={"Dodge"} value={`${stats.dodge.toFixed(2)}%`}/>
                     <StatRow label={"Parry"} value={`${stats.parry.toFixed(2)}%`}/>
-                </div>
             </div>
         </div>
     )
@@ -100,15 +98,15 @@ export const CharacterResourcesStats: React.FC<CharacterStatsProps> = ({stats}) 
                 <span>Resources</span>
             </div>
             <div className="space-y-2">
-                <div className="flex justify-between">
+                <div className="flex justify-between mt-1">
                     <div className="font-medium">Health</div>
                     <div>{stats.health}</div>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between mt-1">
                     <div className="font-medium">{stats.resource.type}</div>
                     <div>{stats.resource.value}</div>
                 </div>
-                {stats.manaRegen > 0 && <div className="flex justify-between">
+                {stats.manaRegen > 0 && <div className="flex justify-between mt-1">
                     <div className="font-medium">Mana Regen</div>
                     <div>{stats.manaRegen}</div>
                 </div>}

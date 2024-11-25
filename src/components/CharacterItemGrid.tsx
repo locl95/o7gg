@@ -60,7 +60,7 @@ const CharacterItemGrid: React.FC<CharacterItemGridProps> = ({char}) => {
                     <CharacterItemSlot item={char.items.find(item => item.slot === "Offhand")} fallback={"offhand"}/>
                 </div>
 
-                <div className="col-span-2 grid grid-rows-3 grid-cols-2 gap-2">
+                <div className="col-span-2 grid grid-cols-2 gap-2">
                     <CharacterCoreStats stats={char.stats}/>
                     <CharacterOffensiveStats stats={char.stats}/>
                     <CharacterDefensiveStats stats={char.stats}/>

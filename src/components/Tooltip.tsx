@@ -10,12 +10,7 @@ interface TooltipProps {
 const Tooltip: React.FC<TooltipProps> = ({
     children,
     offset = { x: 0, y: 0 },
-    content,
-  }: {
-    children: React.ReactElement;
-    className?: string;
-    offset?: { x: number; y: number };
-    content: React.ReactElement;
+    content
   }) => {
     const [show, setShow] = React.useState(false);
     const [{ clientX, clientY }, setCoordinates] = React.useState<{

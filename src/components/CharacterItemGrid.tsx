@@ -6,6 +6,7 @@ import {
     CharacterOffensiveStats,
     CharacterResistancesStats, CharacterResourcesStats
 } from "./CharacterStats";
+import Tooltip from "./Tooltip";
 
 
 interface CharacterItemSlotProps {
@@ -28,17 +29,26 @@ const CharacterItemSlot: React.FC<CharacterItemSlotProps> = ({item, fallback}) =
 
     return (
         <div className="relative flex justify-center">
-            <div className="group">
-                <img
-                    src={item ? item.icon : `/icons/gear/${fallback}.webp`}
-                    alt={item ? item.name : fallback}
-                    className={`w-[56px] h-[56px] object-contain rounded-lg shadow-sm border-4 ${borderColor}`}
-                />
-                { item && 
-                    <div className={`absolute bottom-full left hidden px-2 py-1 bg-black text-white rounded group-hover:block whitespace-nowrap `}>
-                        {item ? item.name : undefined}
-                    </div>
-                }
+            <div>
+                { item ? (
+                    <Tooltip
+                        offset={{ x: 10, y: -40}}
+                        content={  
+                            <div className="bg-black text-white py-1 px-2 rounded-lg">
+                                <span className="block">{item ? item.name : undefined}</span>
+                            </div>}>
+                        <img
+                            src={item ? item.icon : `/icons/gear/${fallback}.webp`}
+                            alt={item ? item.name : fallback}
+                            className={`w-[56px] h-[56px] object-contain rounded-lg shadow-sm border-4 ${borderColor}`}
+                        />
+                    </Tooltip>
+                ) : (
+                    <img
+                        src={`/icons/gear/${fallback}.webp`}
+                        alt={fallback}
+                        className={`w-[56px] h-[56px] object-contain rounded-lg shadow-sm border-4 ${borderColor}`}
+                    />)}
             </div>
         </div>
     )

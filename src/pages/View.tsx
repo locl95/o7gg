@@ -262,7 +262,6 @@ const View: React.FC = () => {
                 setViewName(data.viewName)
                 setCharacters(data.data);
             } catch (error) {
-                console.error('Failed to fetch characters', error);
                 setError("Failed to fetch data or invalid viewId")
             } finally {
                 setLoading(false);
@@ -271,8 +270,6 @@ const View: React.FC = () => {
 
         loadCharacters();
     }, [viewId]);
-
-    console.log(error)
 
     if (error) {
         return <NotFound error={error} />

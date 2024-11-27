@@ -1,3 +1,5 @@
+import Footer from "../components/Footer";
+
 interface NotFoundProps {
     error: string;
 }
@@ -5,7 +7,12 @@ interface NotFoundProps {
 const NotFound: React.FC<NotFoundProps> = ({error}) => {
 
     return (
-        <>{error}</>
+        <div className="flex flex-col min-h-screen bg-gray-200">
+            <div className="flex-grow flex items-center justify-center">
+                {error}
+            </div>
+            <Footer />
+        </div>
     )
 }
 

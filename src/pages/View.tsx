@@ -4,7 +4,6 @@ import {useParams} from "react-router-dom";
 import CharacterTable from "../components/CharacterTable";
 import WoWTitle from "../components/ViewName";
 import Footer from "../components/Footer";
-import LoadingSpinner from "../components/LoadingSpinner";
 import Loading from "../components/Loading";
 
 export class WowItem {

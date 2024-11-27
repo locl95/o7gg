@@ -3,7 +3,6 @@ import { fetchViews } from "../api/data";
 import Footer from "../components/Footer";
 import WoWTitle from "../components/ViewName";
 import ViewsTable from "../components/ViewsTable";
-import LoadingSpinner from "../components/LoadingSpinner";
 import Loading from "../components/Loading";
 
 export interface View {
@@ -18,23 +17,13 @@ export interface View {
 const Home: React.FC = () => {
   const [views, setViews] = useState<View[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const loadViews = async () => {
       setLoading(true);
-      try {
         const viewsData = await fetchViews();
-        if (viewsData) {
-          setViews(viewsData);
-        } else {
-          setError('Failed to load views');
-        }
-      } catch (error) {
-        setError('Failed to load views');
-      } finally {
+        setViews(viewsData)
         setLoading(false);
-      }
     };
   
     loadViews();
@@ -44,12 +33,6 @@ const Home: React.FC = () => {
   if (loading) {
     return <Loading />
   }
-
-  if (error) {
-    return <>{error}</>
-  }
-
-  console.log(views)
 
     return (
         <div className="flex flex-col justifiy-between min-h-screen bg-gray-200 pt-8">

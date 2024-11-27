@@ -4,6 +4,7 @@ import {useParams} from "react-router-dom";
 import CharacterTable from "../components/CharacterTable";
 import WoWTitle from "../components/ViewName";
 import Footer from "../components/Footer";
+import NotFound from "./NotFound";
 
 export class WowItem {
     readonly id: number
@@ -237,6 +238,7 @@ const View: React.FC = () => {
     const [characters, setCharacters] = useState<Character[]>([]);
     const [viewName, setViewName] = useState<string | undefined>(undefined)
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | undefined>(undefined);
     const {viewId} = useParams();
 
     const LoadingSpinner = () => (
@@ -254,12 +256,14 @@ const View: React.FC = () => {
     useEffect(() => {
         const loadCharacters = async () => {
             try {
+                setError(undefined)
                 setLoading(true)
                 const data = await fetchData(viewId!)
                 setViewName(data.viewName)
                 setCharacters(data.data);
             } catch (error) {
                 console.error('Failed to fetch characters', error);
+                setError("Failed to fetch data or invalid viewId")
             } finally {
                 setLoading(false);
             }
@@ -267,6 +271,12 @@ const View: React.FC = () => {
 
         loadCharacters();
     }, [viewId]);
+
+    console.log(error)
+
+    if (error) {
+        return <NotFound error={error} />
+    }
 
     if (loading) {
         return (

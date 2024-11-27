@@ -6,7 +6,7 @@ interface Props {
 
 const WoWTitle: React.FC<Props> = ({ title }) => {
   return (
-      <h1 className="text-5xl text-center font-wow text-gold text-stroke">{title}</h1>
+      <h1 className="text-5xl font-wow text-gold text-stroke">{title}</h1>
   );
 };
 

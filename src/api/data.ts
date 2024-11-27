@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {Character} from "../pages/View";
+import { View } from '../pages/Home';
 
 interface ViewData {
     viewName: string
@@ -17,7 +18,7 @@ export const fetchData: (id: string) => Promise<ViewData> = async (id: string) =
     return response.data;
 }
 
-export const fetchViews = async () => {
+export const fetchViews = async (): Promise<View[]> => {
     try {
         const response = await api.get('views', {
             headers: {Authorization: `Bearer ${process.env.REACT_APP_SERVICE_TOKEN}`},
@@ -27,6 +28,6 @@ export const fetchViews = async () => {
         return response.data;
     } catch (error) {
         console.error('Error fetching views:', error);
-        return null;
+        return [];
     };
 };

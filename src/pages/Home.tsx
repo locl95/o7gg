@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { fetchViews } from "../api/data";
 import Footer from "../components/Footer";
+import WoWTitle from "../components/ViewName";
+import ViewsTable from "../components/ViewsTable";
 
-interface View {
+export interface View {
     characterIds: number[];
     game: string;
     id: string;
@@ -12,10 +14,9 @@ interface View {
   }
 
 const Home: React.FC = () => {
-  const [views, setViews] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-  const owner = 'weewee';
+  const [views, setViews] = useState<View[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   const LoadingSpinner = () => (
       <div className="flex justify-center items-center relative">
@@ -35,8 +36,7 @@ const Home: React.FC = () => {
       try {
         const viewsData = await fetchViews();
         if (viewsData) {
-          const filteredViews = viewsData.filter((view: { owner: string; }) => view.owner === owner);
-          setViews(filteredViews);
+          setViews(viewsData);
         } else {
           setError('Failed to load views');
         }
@@ -48,11 +48,18 @@ const Home: React.FC = () => {
     };
   
     loadViews();
-  }, [owner]);
+  }, []);
 
 
   if (loading) {
-    return <LoadingSpinner />;
+    return (
+      <div className="flex flex-col min-h-screen bg-gray-200">
+          <div className="flex-grow flex items-center justify-center">
+              <LoadingSpinner />
+          </div>
+          <Footer />
+      </div>
+  );
   }
 
   if (error) {
@@ -62,9 +69,10 @@ const Home: React.FC = () => {
   console.log(views)
 
     return (
-        <div className="flex flex-col min-h-screen bg-gray-200">
-          <div className="w-full max-w-7xl flex flex-col mx-auto" >
-            <h1 className="text-5xl font-wow text-gold text-stroke">o7.gg</h1>
+        <div className="flex flex-col justifiy-between min-h-screen bg-gray-200 pt-8">
+          <div className="flex-grow w-full max-w-7xl flex flex-col mx-auto mb-12" >
+            <WoWTitle title="o7.gg" />
+            <ViewsTable views={views} />
           </div>
           <Footer />
         </div>

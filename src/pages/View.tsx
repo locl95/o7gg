@@ -4,6 +4,8 @@ import {useParams} from "react-router-dom";
 import CharacterTable from "../components/CharacterTable";
 import WoWTitle from "../components/ViewName";
 import Footer from "../components/Footer";
+import LoadingSpinner from "../components/LoadingSpinner";
+import Loading from "../components/Loading";
 
 export class WowItem {
     readonly id: number
@@ -239,18 +241,6 @@ const View: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const {viewId} = useParams();
 
-    const LoadingSpinner = () => (
-        <div className="flex justify-center items-center relative">
-            {/* Spinner */}
-            <div className="w-64 h-64 border-8 border-t-8 border-gray-200 border-solid rounded-full animate-spin border-t-red-500"></div>
-
-            {/* Spinning text */}
-            <div className="absolute text-center text-2xl text-red-500 font-bold animate-[spin_3s_linear_infinite]">
-                o7
-            </div>
-        </div>
-    );
-
     useEffect(() => {
         const loadCharacters = async () => {
             try {
@@ -269,17 +259,7 @@ const View: React.FC = () => {
     }, [viewId]);
 
     if (loading) {
-        return (
-            <div className="flex flex-col min-h-screen bg-gray-200">
-                {/* Main content area should grow */}
-                <div className="flex-grow flex items-center justify-center">
-                    <LoadingSpinner />
-                </div>
-
-                {/* Footer always at the bottom */}
-                <Footer />
-            </div>
-        );
+        return <Loading />
     }
 
     return (

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {fetchData} from "../api/data";
+import {BackendError, fetchData} from "../api/data";
 import {useParams} from "react-router-dom";
 import CharacterTable from "../components/CharacterTable";
 import WoWTitle from "../components/ViewName";
@@ -238,21 +238,22 @@ const View: React.FC = () => {
     const [characters, setCharacters] = useState<Character[]>([]);
     const [viewName, setViewName] = useState<string | undefined>(undefined)
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<BackendError>();
     const {viewId} = useParams();
+
+
 
     useEffect(() => {
         const loadCharacters = async () => {
-            try {
                 setLoading(true)
-                const data = await fetchData(viewId!)
-                setViewName(data.viewName)
-                setCharacters(data.data);
-            } catch (error) {
-                console.error('Failed to fetch characters', error);
-            } finally {
-                setLoading(false);
-            }
-        };
+                const dataOrError = await fetchData(viewId!)
+                if (dataOrError instanceof BackendError) setError(dataOrError)
+                else {
+                    setViewName(dataOrError.viewName)
+                    setCharacters(dataOrError.data);
+                    setLoading(false);
+                }
+            };
 
         loadCharacters();
     }, [viewId]);

@@ -251,8 +251,8 @@ const View: React.FC = () => {
                 else {
                     setViewName(dataOrError.viewName)
                     setCharacters(dataOrError.data);
-                    setLoading(false);
                 }
+                setLoading(false);
             };
 
         loadCharacters();

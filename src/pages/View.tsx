@@ -279,9 +279,7 @@ const View: React.FC = () => {
 
   if (error) return <Error error={error} />;
 
-  if (loading) {
-    return <Loading />;
-  }
+  if (loading) return <Loading />;
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-200">

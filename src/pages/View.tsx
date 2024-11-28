@@ -258,6 +258,8 @@ const View: React.FC = () => {
         loadCharacters();
     }, [viewId]);
 
+    if (error) {}
+
     if (loading) {
         return <Loading />
     }

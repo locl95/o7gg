@@ -23,18 +23,16 @@ const Home: React.FC = () => {
   useEffect(() => {
     const loadViews = async () => {
       setLoading(true);
-        const viewsData = await fetchViews();
-        if (viewsData instanceof BackendError) setError(viewsData)
-          else {
-            console.log(viewsData)
-         setViews(viewsData)
-          }
+        const viewsDataOrError = await fetchViews();
+        if (viewsDataOrError instanceof BackendError) setError(viewsDataOrError)
+        else setViews(viewsDataOrError)
         setLoading(false);
     };
   
     loadViews();
   }, []);
 
+  if (error) {}
 
   if (loading) {
     return <Loading />

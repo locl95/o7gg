@@ -7,45 +7,44 @@ import Loading from "../components/Loading";
 import { BackendError } from "../api/data";
 
 export interface View {
-    characterIds: number[];
-    game: string;
-    id: string;
-    name: string;
-    owner: string;
-    published: boolean;
-  }
+  characterIds: number[];
+  game: string;
+  id: string;
+  name: string;
+  owner: string;
+  published: boolean;
+}
 
 const Home: React.FC = () => {
   const [views, setViews] = useState<View[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [, setError] = useState<BackendError>()
+  const [, setError] = useState<BackendError>();
 
   useEffect(() => {
     const loadViews = async () => {
       setLoading(true);
-        const viewsDataOrError = await fetchViews();
-        if (viewsDataOrError instanceof BackendError) setError(viewsDataOrError)
-        else setViews(viewsDataOrError)
-        setLoading(false);
+      const viewsDataOrError = await fetchViews();
+      if (viewsDataOrError instanceof BackendError) setError(viewsDataOrError);
+      else setViews(viewsDataOrError);
+      setLoading(false);
     };
-  
+
     loadViews();
   }, []);
 
-
   if (loading) {
-    return <Loading />
+    return <Loading />;
   }
 
-    return (
-        <div className="flex flex-col justifiy-between min-h-screen bg-gray-200 pt-8">
-          <div className="flex-grow w-full max-w-7xl flex flex-col mx-auto mb-12" >
-            <WoWTitle title="o7.gg" />
-            <ViewsTable views={views} />
-          </div>
-          <Footer />
-        </div>
-    )
-}
+  return (
+    <div className="flex flex-col justifiy-between min-h-screen bg-gray-200 pt-8">
+      <div className="flex-grow w-full max-w-7xl flex flex-col mx-auto mb-12">
+        <WoWTitle title="o7.gg" />
+        <ViewsTable views={views} />
+      </div>
+      <Footer />
+    </div>
+  );
+};
 
 export default Home;

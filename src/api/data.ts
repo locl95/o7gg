@@ -7,6 +7,21 @@ interface ViewData {
     data: Character[]
 }
 
+interface NotFoundError {
+    statusCode: number
+    error: string
+}
+
+export class BackendError {
+    readonly statusCode: number;
+    readonly error: string;
+  
+    constructor(statusCode: number, error: string) {
+      this.statusCode = statusCode;
+      this.error = error;
+    }
+  }
+
 const api = axios.create({
     baseURL: `${process.env.REACT_APP_API_HOST}/api`, // Replace with your backend URL
 })
@@ -18,16 +33,19 @@ export const fetchData: (id: string) => Promise<ViewData> = async (id: string) =
     return response.data;
 }
 
-export const fetchViews = async () => {
+export const fetchViews: () => Promise<View[] | BackendError> = async () => {
     try {
         const response = await api.get('views', {
             headers: {Authorization: `Bearer ${process.env.REACT_APP_SERVICE_TOKEN}`},
             params: {
                 game: 'wow_hc' },
-        });
+            });
+        if (response.status >= 400) return new BackendError(
+                404,
+                response.data.toString()
+        )
         return response.data;
-    } catch (error) {
-        console.error('Error fetching views:', error);
-        return error;
-    };
+    } catch(error: any) {
+        return new BackendError (500, error.toString())
+    }
 };

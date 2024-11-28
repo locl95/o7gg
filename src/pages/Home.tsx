@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import WoWTitle from "../components/ViewName";
 import ViewsTable from "../components/ViewsTable";
 import Loading from "../components/Loading";
+import { BackendError } from "../api/data";
 
 export interface View {
     characterIds: number[];
@@ -17,12 +18,17 @@ export interface View {
 const Home: React.FC = () => {
   const [views, setViews] = useState<View[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<BackendError>()
 
   useEffect(() => {
     const loadViews = async () => {
       setLoading(true);
         const viewsData = await fetchViews();
-        setViews(viewsData)
+        if (viewsData instanceof BackendError) setError(viewsData)
+          else {
+            console.log(viewsData)
+         setViews(viewsData)
+          }
         setLoading(false);
     };
   

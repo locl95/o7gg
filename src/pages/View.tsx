@@ -238,7 +238,7 @@ const View: React.FC = () => {
     const [characters, setCharacters] = useState<Character[]>([]);
     const [viewName, setViewName] = useState<string | undefined>(undefined)
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<BackendError>();
+    const [, setError] = useState<BackendError>();
     const {viewId} = useParams();
 
 
@@ -257,8 +257,6 @@ const View: React.FC = () => {
 
         loadCharacters();
     }, [viewId]);
-
-    if (error) {}
 
     if (loading) {
         return <Loading />

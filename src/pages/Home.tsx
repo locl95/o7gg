@@ -18,7 +18,7 @@ export interface View {
 const Home: React.FC = () => {
   const [views, setViews] = useState<View[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<BackendError>()
+  const [, setError] = useState<BackendError>()
 
   useEffect(() => {
     const loadViews = async () => {
@@ -32,7 +32,6 @@ const Home: React.FC = () => {
     loadViews();
   }, []);
 
-  if (error) {}
 
   if (loading) {
     return <Loading />

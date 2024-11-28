@@ -5,6 +5,7 @@ import CharacterTable from "../components/CharacterTable";
 import WoWTitle from "../components/ViewName";
 import Footer from "../components/Footer";
 import Loading from "../components/Loading";
+import Error from "./Error";
 
 export class WowItem {
   readonly id: number;
@@ -258,7 +259,7 @@ const View: React.FC = () => {
   const [characters, setCharacters] = useState<Character[]>([]);
   const [viewName, setViewName] = useState<string | undefined>(undefined);
   const [loading, setLoading] = useState(false);
-  const [, setError] = useState<BackendError>();
+  const [error, setError] = useState<BackendError>();
   const { viewId } = useParams();
 
   useEffect(() => {
@@ -275,6 +276,8 @@ const View: React.FC = () => {
 
     loadCharacters();
   }, [viewId]);
+
+  if (error) return <Error error={error} />;
 
   if (loading) {
     return <Loading />;

@@ -5,6 +5,7 @@ import WoWTitle from "../components/ViewName";
 import ViewsTable from "../components/ViewsTable";
 import Loading from "../components/Loading";
 import { BackendError } from "../api/data";
+import Error from "./Error";
 
 export interface View {
   characterIds: number[];
@@ -18,7 +19,7 @@ export interface View {
 const Home: React.FC = () => {
   const [views, setViews] = useState<View[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [, setError] = useState<BackendError>();
+  const [error, setError] = useState<BackendError>();
 
   useEffect(() => {
     const loadViews = async () => {
@@ -32,9 +33,9 @@ const Home: React.FC = () => {
     loadViews();
   }, []);
 
-  if (loading) {
-    return <Loading />;
-  }
+  if (error) return <Error error={error} />;
+
+  if (loading) return <Loading />;
 
   return (
     <div className="flex flex-col justifiy-between min-h-screen bg-gray-200 pt-8">

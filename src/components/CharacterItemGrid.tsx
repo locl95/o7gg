@@ -74,7 +74,7 @@ const CharacterItemGrid: React.FC<CharacterItemGridProps> = ({char}) => {
                     <CharacterItemSlot item={char.items.find(item => item.slot === "Tabard")} fallback={"tabard"}/>
                     <CharacterItemSlot item={char.items.find(item => item.slot === "Wrist")} fallback={"wrist"}/>
                     <CharacterItemSlot item={char.items.find(item => item.slot === "Main Hand")} fallback={"mainhand"}/>
-                    <CharacterItemSlot item={char.items.find(item => item.slot === "Offhand")} fallback={"offhand"}/>
+                    <CharacterItemSlot item={char.items.find(item => item.slot === "Off Hand")} fallback={"offhand"}/>
                 </div>
 
                 <div className="col-span-2 grid grid-cols-2 gap-2">

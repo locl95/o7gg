@@ -7,11 +7,26 @@ import Footer from "../components/Footer";
 import Loading from "../components/Loading";
 import Error from "./Error";
 
+type SellPrice = {
+  readonly header: string;
+  readonly gold: string;
+  readonly silver: string;
+  readonly copper: string;
+};
+
 export class WowItem {
   readonly id: number;
   readonly slot: string;
   readonly quality: string;
   readonly name: string;
+  readonly level: number;
+  readonly requiredLevel: number;
+  readonly itemSubclass: string;
+  readonly armor: string;
+  readonly stats: string[];
+  readonly spells: string[];
+  readonly sellPrice: SellPrice;
+  readonly durability: string;
   readonly icon: string;
 
   constructor(
@@ -19,12 +34,28 @@ export class WowItem {
     slot: string,
     quality: string,
     name: string,
+    level: number,
+    requiredLevel: number,
+    itemSubclass: string,
+    armor: string,
+    stats: string[],
+    spells: string[],
+    sellPrice: SellPrice,
+    durability: string,
     icon: string
   ) {
     this.id = id;
     this.slot = slot;
     this.quality = quality;
     this.name = name;
+    this.level = level;
+    this.requiredLevel = requiredLevel;
+    this.itemSubclass = itemSubclass;
+    this.armor = armor;
+    this.stats = stats;
+    this.spells = spells;
+    this.sellPrice = sellPrice;
+    this.durability = durability;
     this.icon = icon;
   }
 }

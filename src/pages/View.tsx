@@ -14,6 +14,12 @@ type SellPrice = {
   readonly copper: string;
 };
 
+type WeaponStats = {
+  readonly damage: string;
+  readonly dps: string;
+  readonly attackSpeed: string;
+};
+
 export class WowItem {
   readonly id: number;
   readonly slot: string;
@@ -27,6 +33,7 @@ export class WowItem {
   readonly spells: string[];
   readonly sellPrice: SellPrice;
   readonly durability: string;
+  readonly weaponStats: WeaponStats;
   readonly icon: string;
 
   constructor(
@@ -42,6 +49,7 @@ export class WowItem {
     spells: string[],
     sellPrice: SellPrice,
     durability: string,
+    weaponStats: WeaponStats,
     icon: string
   ) {
     this.id = id;
@@ -56,6 +64,7 @@ export class WowItem {
     this.spells = spells;
     this.sellPrice = sellPrice;
     this.durability = durability;
+    this.weaponStats = weaponStats;
     this.icon = icon;
   }
 }

@@ -26,6 +26,7 @@ export class WowItem {
   readonly quality: string;
   readonly name: string;
   readonly level: number;
+  readonly binding: string;
   readonly requiredLevel: number;
   readonly itemSubclass: string;
   readonly armor: string;
@@ -42,6 +43,7 @@ export class WowItem {
     quality: string,
     name: string,
     level: number,
+    binding: string,
     requiredLevel: number,
     itemSubclass: string,
     armor: string,
@@ -57,6 +59,7 @@ export class WowItem {
     this.quality = quality;
     this.name = name;
     this.level = level;
+    this.binding = binding;
     this.requiredLevel = requiredLevel;
     this.itemSubclass = itemSubclass;
     this.armor = armor;

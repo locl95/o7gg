@@ -161,6 +161,7 @@ const TooltipWowItem: React.FC<TooltipWowItemProps> = ({ item, fallback }) => {
         <div className="flex flex-col bg-black text-white py-1 px-2 rounded-lg max-w-sm">
           <span className={`block ${nameColor}`}>{item.name}</span>
           <span className="text-yellow-400">Item level {item.level}</span>
+          <span>{item.binding}</span>
           <div className="flex justify-between">
             <span>{item.slot}</span>
             {item.itemSubclass !== "Miscellaneous" && (

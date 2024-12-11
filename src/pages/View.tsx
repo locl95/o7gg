@@ -7,24 +7,67 @@ import Footer from "../components/Footer";
 import Loading from "../components/Loading";
 import Error from "./Error";
 
+type SellPrice = {
+  readonly header: string;
+  readonly gold: string;
+  readonly silver: string;
+  readonly copper: string;
+};
+
+type WeaponStats = {
+  readonly damage: string;
+  readonly dps: string;
+  readonly attackSpeed: string;
+};
+
 export class WowItem {
   readonly id: number;
   readonly slot: string;
   readonly quality: string;
   readonly name: string;
-  readonly icon: string;
+  readonly level: number;
+  readonly binding: string | undefined;
+  readonly requiredLevel: number;
+  readonly itemSubclass: string;
+  readonly armor: string | undefined;
+  readonly stats: string[];
+  readonly spells: string[];
+  readonly sellPrice: SellPrice | undefined;
+  readonly durability: string | undefined;
+  readonly weaponStats: WeaponStats | undefined;
+  readonly icon: string | undefined;
 
   constructor(
     id: number,
     slot: string,
     quality: string,
     name: string,
-    icon: string
+    level: number,
+    binding: string | undefined,
+    requiredLevel: number,
+    itemSubclass: string,
+    armor: string | undefined,
+    stats: string[],
+    spells: string[],
+    sellPrice: SellPrice | undefined,
+    durability: string | undefined,
+    weaponStats: WeaponStats | undefined,
+    icon: string | undefined
   ) {
     this.id = id;
     this.slot = slot;
     this.quality = quality;
     this.name = name;
+    this.level = level;
+    this.binding = binding;
+    this.requiredLevel = requiredLevel;
+    this.itemSubclass = itemSubclass;
+    this.armor = armor;
+    this.stats = stats;
+    this.spells = spells;
+    this.sellPrice = sellPrice;
+    this.durability = durability;
+    this.weaponStats = weaponStats;
     this.icon = icon;
   }
 }

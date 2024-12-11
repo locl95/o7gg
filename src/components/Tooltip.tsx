@@ -190,13 +190,13 @@ const TooltipWowItem: React.FC<TooltipWowItemProps> = ({ item, fallback }) => {
               <div key={index}>{spell}</div>
             ))}
           </div>
-          <span>{formatSellPrice(item.sellPrice)}</span>
+          <span>{item.sellPrice ? formatSellPrice(item.sellPrice) : ""}</span>
         </div>
       }
     >
       <img
-        src={item ? item.icon : `/icons/gear/${fallback}.webp`}
-        alt={item ? item.name : fallback}
+        src={item?.icon || `/icons/gear/${fallback}.webp`}
+        alt={item?.name || fallback}
         className={`w-[56px] h-[56px] object-contain rounded-lg shadow-sm border-4 ${borderColor}`}
       />
     </Tooltip>

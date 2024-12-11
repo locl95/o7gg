@@ -26,16 +26,16 @@ export class WowItem {
   readonly quality: string;
   readonly name: string;
   readonly level: number;
-  readonly binding: string;
+  readonly binding: string | undefined;
   readonly requiredLevel: number;
   readonly itemSubclass: string;
-  readonly armor: string;
+  readonly armor: string | undefined;
   readonly stats: string[];
   readonly spells: string[];
-  readonly sellPrice: SellPrice;
-  readonly durability: string;
-  readonly weaponStats: WeaponStats;
-  readonly icon: string;
+  readonly sellPrice: SellPrice | undefined;
+  readonly durability: string | undefined;
+  readonly weaponStats: WeaponStats | undefined;
+  readonly icon: string | undefined;
 
   constructor(
     id: number,
@@ -43,16 +43,16 @@ export class WowItem {
     quality: string,
     name: string,
     level: number,
-    binding: string,
+    binding: string | undefined,
     requiredLevel: number,
     itemSubclass: string,
-    armor: string,
+    armor: string | undefined,
     stats: string[],
     spells: string[],
-    sellPrice: SellPrice,
-    durability: string,
-    weaponStats: WeaponStats,
-    icon: string
+    sellPrice: SellPrice | undefined,
+    durability: string | undefined,
+    weaponStats: WeaponStats | undefined,
+    icon: string | undefined
   ) {
     this.id = id;
     this.slot = slot;

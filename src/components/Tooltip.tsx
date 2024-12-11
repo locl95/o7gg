@@ -120,7 +120,7 @@ const TooltipWowItem: React.FC<TooltipWowItemProps> = ({ item, fallback }) => {
     return (
       <div className="flex gap-x-1.5">
         {price.header}
-        {price.gold && price.gold !== "0" && price.gold !== "" && (
+        {price.gold && price.gold !== "0" && (
           <span className="flex items-center">
             {price.gold}
             <img
@@ -130,7 +130,7 @@ const TooltipWowItem: React.FC<TooltipWowItemProps> = ({ item, fallback }) => {
             />
           </span>
         )}
-        {price.silver && price.silver !== "0" && price.silver !== "" && (
+        {price.silver && price.silver !== "0" && (
           <div className="flex items-center">
             {price.silver}
             <img
@@ -140,7 +140,7 @@ const TooltipWowItem: React.FC<TooltipWowItemProps> = ({ item, fallback }) => {
             />
           </div>
         )}
-        {price.copper && price.copper !== "0" && price.copper !== "" && (
+        {price.copper && price.copper !== "0" && (
           <div className="flex items-center">
             {price.copper}
             <img
@@ -184,7 +184,11 @@ const TooltipWowItem: React.FC<TooltipWowItemProps> = ({ item, fallback }) => {
             ))}
           </div>
           <span>{item.durability}</span>
-          <span>Requires Level {item.requiredLevel}</span>
+          <span>
+            {item.requiredLevel === 0
+              ? ""
+              : `Requires Level ${item.requiredLevel}`}
+          </span>
           <div className="flex flex-col text-green-500">
             {item.spells.map((spell, index) => (
               <div key={index}>{spell}</div>

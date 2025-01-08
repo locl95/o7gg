@@ -183,6 +183,10 @@ const TooltipWowItem: React.FC<TooltipWowItemProps> = ({ item, fallback }) => {
               <div key={index}>{stat}</div>
             ))}
           </div>
+          <div>
+          {item.enchantments && (
+
+          )}</div>
           <span>{item.durability}</span>
           <span>
             {item.requiredLevel === 0

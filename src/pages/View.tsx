@@ -31,6 +31,7 @@ export class WowItem {
   readonly itemSubclass: string;
   readonly armor: string | undefined;
   readonly stats: string[];
+  readonly enchantments: string[] | undefined;
   readonly spells: string[];
   readonly sellPrice: SellPrice | undefined;
   readonly durability: string | undefined;
@@ -48,6 +49,7 @@ export class WowItem {
     itemSubclass: string,
     armor: string | undefined,
     stats: string[],
+    enchantments: string[] | undefined,
     spells: string[],
     sellPrice: SellPrice | undefined,
     durability: string | undefined,
@@ -63,6 +65,7 @@ export class WowItem {
     this.requiredLevel = requiredLevel;
     this.itemSubclass = itemSubclass;
     this.armor = armor;
+    this.enchantments = enchantments;
     this.stats = stats;
     this.spells = spells;
     this.sellPrice = sellPrice;

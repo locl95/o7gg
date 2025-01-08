@@ -31,7 +31,7 @@ export class WowItem {
   readonly itemSubclass: string;
   readonly armor: string | undefined;
   readonly stats: string[];
-  readonly enchantments: string[] | undefined;
+  readonly enchantments: string[];
   readonly spells: string[];
   readonly sellPrice: SellPrice | undefined;
   readonly durability: string | undefined;
@@ -49,7 +49,7 @@ export class WowItem {
     itemSubclass: string,
     armor: string | undefined,
     stats: string[],
-    enchantments: string[] | undefined,
+    enchantments: string[],
     spells: string[],
     sellPrice: SellPrice | undefined,
     durability: string | undefined,

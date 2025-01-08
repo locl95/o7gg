@@ -183,10 +183,17 @@ const TooltipWowItem: React.FC<TooltipWowItemProps> = ({ item, fallback }) => {
               <div key={index}>{stat}</div>
             ))}
           </div>
-          <div>
-          {item.enchantments && (
-
-          )}</div>
+          <div className="flex flex-col text-green-500">
+            {item.enchantments.map((ench, index) => (
+              <div key={index}>
+                {ench.includes("(")
+                  ? ench.split("(")[0].trim()
+                  : ench.includes(":")
+                  ? ench.split(":")[1].trim()
+                  : ench}
+              </div>
+            ))}
+          </div>
           <span>{item.durability}</span>
           <span>
             {item.requiredLevel === 0

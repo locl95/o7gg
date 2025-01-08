@@ -332,6 +332,7 @@ const View: React.FC = () => {
       <div className="grid-cols-3 flex-grow">
         {viewName && (
           <div className="flex items-center justify-between p-2">
+            <img src="/icons/o7gg.png" alt="o7gg" />
             <WoWTitle title={viewName} />
             <img src="/icons/kosgg.jpeg" alt="kosgg" />
           </div>

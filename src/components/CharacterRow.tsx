@@ -79,7 +79,7 @@ const CharacterRow: React.FC<CharacterRowProps> = ({ char, index }) => {
             <div className="flex flex-col text-right text-sm text-gray-500">
               <span>Last logged in</span>
               <span>
-                {new Date(char.lastLogin).toLocaleString("en", {
+                {new Date(char.lastLogin).toLocaleString("en-GB", {
                   year: "numeric",
                   month: "long",
                   day: "numeric",

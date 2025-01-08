@@ -252,6 +252,7 @@ export class Character {
   readonly items: WowItem[];
   readonly stats: WowStats;
   readonly specializations: WowSpecializations;
+  readonly lastLogin: string;
   readonly guild?: string;
   readonly avatar?: string;
 
@@ -273,6 +274,7 @@ export class Character {
     items: WowItem[],
     stats: WowStats,
     specializations: WowSpecializations,
+    lastLogin: string,
     guild?: string,
     avatar?: string
   ) {
@@ -293,6 +295,7 @@ export class Character {
     this.items = items;
     this.stats = stats;
     this.specializations = specializations;
+    this.lastLogin = lastLogin;
     this.guild = guild;
     this.avatar = avatar;
   }

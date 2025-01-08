@@ -46,7 +46,7 @@ export const fetchViews: () => Promise<View[] | BackendError> = async () => {
     });
     if (response.status >= 400)
       return new BackendError(404, response.data.toString());
-    return response.data;
+    return response.data.records;
   } catch (error: any) {
     return new BackendError(500, error.toString());
   }

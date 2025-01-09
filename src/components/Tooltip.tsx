@@ -154,6 +154,15 @@ const TooltipWowItem: React.FC<TooltipWowItemProps> = ({ item, fallback }) => {
     );
   }
 
+  const formatEnchantment = (enchantment: string) => {
+    if (enchantment.includes("(")) {
+      return enchantment.split("(")[0].trim();
+    } else if (enchantment.includes(":")) {
+      return enchantment.split(":")[1].trim();
+    }
+    return enchantment;
+  };
+
   return (
     <Tooltip
       offset={{ x: 10, y: -40 }}
@@ -181,6 +190,11 @@ const TooltipWowItem: React.FC<TooltipWowItemProps> = ({ item, fallback }) => {
           <div className="flex flex-col">
             {item.stats.map((stat, index) => (
               <div key={index}>{stat}</div>
+            ))}
+          </div>
+          <div className="flex flex-col text-green-500">
+            {item.enchantments.map((ench, index) => (
+              <div key={index}>{formatEnchantment(ench)}</div>
             ))}
           </div>
           <span>{item.durability}</span>

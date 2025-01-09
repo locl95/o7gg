@@ -28,7 +28,7 @@ const CharacterRow: React.FC<CharacterRowProps> = ({ char, index }) => {
         tabIndex={0}
         role="button"
       >
-        <td className="border border-gray-300 px-4 py-2 align-middle">
+        <td className="hidden sm:border border-gray-300 px-4 py-2 align-middle">
           <img
             src={char.avatar}
             alt="Character Avatar"
@@ -76,7 +76,7 @@ const CharacterRow: React.FC<CharacterRowProps> = ({ char, index }) => {
               </div>
             </div>
             {/* Last Logged In*/}
-            <div className="flex flex-col text-right text-sm text-gray-500">
+            <div className="hidden sm:flex flex-col text-right text-sm text-gray-500">
               <span>Last logged in</span>
               <span>
                 {new Date(char.lastLogin).toLocaleString("en-GB", {
@@ -91,7 +91,7 @@ const CharacterRow: React.FC<CharacterRowProps> = ({ char, index }) => {
             </div>
           </div>
         </td>
-        <td className="border border-gray-300">
+        <td className="hidden sm:flex border border-gray-300">
           <div className="flex items-center justify-center space-x-2 h-full">
             <img
               src={CLASS_ICONS[char.characterClass]}

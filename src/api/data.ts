@@ -42,7 +42,7 @@ export const fetchViews: () => Promise<View[] | BackendError> = async () => {
       headers: {
         Authorization: `Bearer ${process.env.REACT_APP_SERVICE_TOKEN}`,
       },
-      params: { game: "wow_hc" },
+      params: { game: "wow_hc", featured: true },
     });
     if (response.status >= 400)
       return new BackendError(404, response.data.toString());

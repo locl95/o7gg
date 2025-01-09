@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BackendError, fetchData } from "../api/data";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import CharacterTable from "../components/CharacterTable";
 import WoWTitle from "../components/ViewName";
 import Footer from "../components/Footer";
@@ -334,9 +334,12 @@ const View: React.FC = () => {
     <div className="flex flex-col min-h-screen bg-gray-200">
       <div className="grid-cols-3 flex-grow">
         {viewName && (
-          <div className="flex items-center justify-between p-2">
+          <div className="flex items-center justify-between p-2 h-20">
+            <Link to={"/"} className="h-full">
+              <img src="/icons/o7gg.png" alt="o7gg" className="h-full" />
+            </Link>
             <WoWTitle title={viewName} />
-            <img src="/icons/kosgg.jpeg" alt="kosgg" />
+            <img src="/icons/kosgg.jpeg" alt="kosgg" className="h-full" />
           </div>
         )}
         <CharacterTable characters={characters}></CharacterTable>

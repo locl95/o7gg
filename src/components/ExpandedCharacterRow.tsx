@@ -2,7 +2,6 @@ import React from "react";
 import { Character } from "../pages/View";
 import CharacterItemGrid from "./CharacterItemGrid";
 import { WowHeadTalents } from "./TalentsCard";
-import { CLASS_ICONS, RACE_ICONS } from "../utils/constants";
 
 interface ExpandedCharacterRowProps {
   char: Character;

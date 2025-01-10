@@ -336,10 +336,17 @@ const View: React.FC = () => {
         {viewName && (
           <div className="flex items-center justify-between p-2 h-20">
             <Link to={"/"} className="h-full">
-              <img src="/icons/o7gg.png" alt="o7gg" className="h-full" />
+              <img src="/icons/o7gg.png" alt="o7gg" className="h-16 min-w-16" />
             </Link>
-            <WoWTitle title={viewName} className={""} />
-            <img src="/icons/kosgg.jpeg" alt="kosgg" className="h-full" />
+            <WoWTitle
+              title={viewName}
+              className={"text-4xl sm:text-5xl text-center"}
+            />
+            <img
+              src="/icons/kosgg.jpeg"
+              alt="kosgg"
+              className="h-16 min-w-16"
+            />
           </div>
         )}
         <CharacterTable characters={characters}></CharacterTable>

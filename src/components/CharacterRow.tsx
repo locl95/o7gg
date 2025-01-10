@@ -5,6 +5,7 @@ import LevelCell from "./LevelCell";
 import { useState } from "react";
 import ExpandedCharacterRow from "./ExpandedCharacterRow";
 import OpenRowButton from "./OpenRowButton";
+import ExpandedCharacterMobile from "./ExpandedCharacterMobile";
 
 interface CharacterRowProps {
   char: Character;
@@ -28,7 +29,7 @@ const CharacterRow: React.FC<CharacterRowProps> = ({ char, index }) => {
         tabIndex={0}
         role="button"
       >
-        <td className="hidden sm:border border-gray-300 px-4 py-2 align-middle">
+        <td className="hidden sm:flex sm:border px-4 py-2 align-middle">
           <img
             src={char.avatar}
             alt="Character Avatar"
@@ -41,7 +42,7 @@ const CharacterRow: React.FC<CharacterRowProps> = ({ char, index }) => {
               {/* Left side: Name, Guild, and Realm */}
               <div className="flex flex-col items-start space-y-1">
                 {/* Character Name + Guild */}
-                <div className="flex items-center space-x-2">
+                <div className="flex flex-wrap gap-x-2 items-center">
                   <span className="text-lg font-bold">{char.name}</span>
                   {char.guild && (
                     <span className="text-sm text-gray-500">
@@ -49,16 +50,33 @@ const CharacterRow: React.FC<CharacterRowProps> = ({ char, index }) => {
                     </span>
                   )}
                 </div>
-                <div className="flex justify-between space-x-2">
+                <div className="flex items-center justify-between space-x-2">
                   {/* Realm */}
                   <span className="text-sm text-gray-500">
                     ({char.region.toUpperCase()}) {char.realm}
                   </span>
+                  {/* Mobile Icons */}
+                  <div className="flex sm:hidden items-center space-x-2">
+                    {char.isSelfFound && (
+                      <img
+                        src="/icons/ssf.jpg"
+                        alt="SSF Icon"
+                        className="w-8 h-8"
+                      />
+                    )}
+                    {char.isDead && (
+                      <img
+                        src="/icons/rip.svg"
+                        alt="Tombstone Icon"
+                        className="w-8 h-8"
+                      />
+                    )}
+                  </div>
                 </div>
               </div>
 
               {/* Right side: Icons */}
-              <div className="flex items-center space-x-2">
+              <div className="hidden sm:flex items-center space-x-2">
                 {char.isSelfFound && (
                   <img
                     src="/icons/ssf.jpg"
@@ -91,8 +109,8 @@ const CharacterRow: React.FC<CharacterRowProps> = ({ char, index }) => {
             </div>
           </div>
         </td>
-        <td className="hidden sm:flex border border-gray-300">
-          <div className="flex items-center justify-center space-x-2 h-full">
+        <td className="hidden sm:flex items-center justify-center">
+          <div className="flex space-x-2 h-full">
             <img
               src={CLASS_ICONS[char.characterClass]}
               alt={char.characterClass}
@@ -108,7 +126,8 @@ const CharacterRow: React.FC<CharacterRowProps> = ({ char, index }) => {
         <LevelCell char={char} index={index} />
         <OpenRowButton isOpen={isOpen} />
       </tr>
-      {isOpen && <ExpandedCharacterRow char={char}></ExpandedCharacterRow>}
+      {isOpen && <ExpandedCharacterMobile char={char} />}
+      {isOpen && <ExpandedCharacterRow char={char} />}
     </>
   );
 };

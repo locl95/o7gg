@@ -40,7 +40,7 @@ const Home: React.FC = () => {
   return (
     <div className="flex flex-col justify-between min-h-screen bg-gray-200 pt-8">
       <div className="flex-grow w-full max-w-7xl flex flex-col mx-auto mb-12 px-4 sm:px-6 lg:px-8">
-        <WoWTitle title="o7.gg" className="text-center sm:text-left" />
+        <WoWTitle title="o7.gg" className="text-4xl sm:text-5xl" />
         <ViewsTable views={views} />
       </div>
       <Footer />

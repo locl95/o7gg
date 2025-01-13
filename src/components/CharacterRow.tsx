@@ -6,6 +6,7 @@ import { useState } from "react";
 import ExpandedCharacterRow from "./ExpandedCharacterRow";
 import OpenRowButton from "./OpenRowButton";
 import ExpandedCharacterMobile from "./ExpandedCharacterMobile";
+import { Tooltip } from "./Tooltip";
 
 interface CharacterRowProps {
   char: Character;
@@ -78,11 +79,26 @@ const CharacterRow: React.FC<CharacterRowProps> = ({ char, index }) => {
               {/* Right side: Icons */}
               <div className="hidden sm:flex items-center space-x-2">
                 {char.isSelfFound && (
-                  <img
-                    src="/icons/ssf.jpg"
-                    alt="SSF Icon"
-                    className="w-12 h-12"
-                  />
+                  <Tooltip
+                    offset={{ x: 10, y: -40 }}
+                    content={
+                      <div className="flex flex-col bg-black text-white py-1 px-2 rounded-lg max-w-sm">
+                        <span className="text-yellow-400">
+                          Self-Found Adventurer
+                        </span>
+                        <span>
+                          Unable to trade, use the auction house, or send and
+                          receive most mail
+                        </span>
+                      </div>
+                    }
+                  >
+                    <img
+                      src="/icons/ssf.jpg"
+                      alt="SSF Icon"
+                      className="w-12 h-12"
+                    />
+                  </Tooltip>
                 )}
                 {char.isDead && (
                   <img

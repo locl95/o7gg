@@ -7,7 +7,7 @@ import {
   CharacterResistancesStats,
   CharacterResourcesStats,
 } from "./CharacterStats";
-import TooltipWowItem from "./Tooltip";
+import { TooltipWowItem } from "./Tooltip";
 
 interface CharacterItemSlotProps {
   item?: WowItem;

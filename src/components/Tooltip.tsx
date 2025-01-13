@@ -8,7 +8,7 @@ interface TooltipProps {
   content: React.ReactElement;
 }
 
-const Tooltip: React.FC<TooltipProps> = ({
+export const Tooltip: React.FC<TooltipProps> = ({
   children,
   offset = { x: 0, y: 0 },
   content,
@@ -83,7 +83,10 @@ interface TooltipWowItemProps {
   fallback: string;
 }
 
-const TooltipWowItem: React.FC<TooltipWowItemProps> = ({ item, fallback }) => {
+export const TooltipWowItem: React.FC<TooltipWowItemProps> = ({
+  item,
+  fallback,
+}) => {
   const qualityBorderColor: { [key: string]: string } = {
     Poor: "border-gray-500",
     Common: "border-white",
@@ -220,5 +223,3 @@ const TooltipWowItem: React.FC<TooltipWowItemProps> = ({ item, fallback }) => {
     </Tooltip>
   );
 };
-
-export default TooltipWowItem;

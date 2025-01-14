@@ -1,7 +1,7 @@
 import React from "react";
 import { Character } from "../pages/View";
-import CharacterItemGrid from "./CharacterItemGrid";
 import { WowHeadTalents } from "./TalentsCard";
+import CharacterItemGrid from "./CharacterItemGrid";
 
 interface ExpandedCharacterRowProps {
   char: Character;
@@ -12,7 +12,7 @@ const ExpandedCharacterRow: React.FC<ExpandedCharacterRowProps> = ({
 }) => {
   return (
     <tr className="bg-gray-100 transition-all duration-300 ease-in-out">
-      <td colSpan={6} className="border border-gray-300 pl-4 pr-8 py-4">
+      <td colSpan={6} className="pl-4 pr-8 py-4">
         <div className="grid grid-cols-1 gap-4">
           <div className="bg-white shadow-md rounded-lg">
             <div>

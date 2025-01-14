@@ -30,14 +30,14 @@ const CharacterRow: React.FC<CharacterRowProps> = ({ char, index }) => {
         tabIndex={0}
         role="button"
       >
-        <td className="hidden sm:flex sm:border px-4 py-2 align-middle">
+        <td className="hidden sm:table-cell border border-gray-300">
           <img
             src={char.avatar}
             alt="Character Avatar"
             className="w-16 h-16 mx-auto"
           />
         </td>
-        <td className="border border-gray-300 px-4 py-2">
+        <td className="border border-gray-300 px-4 py-4">
           <div className="flex justify-between items-center space-x-2">
             <div className="flex space-x-2">
               {/* Left side: Name, Guild, and Realm */}
@@ -125,8 +125,8 @@ const CharacterRow: React.FC<CharacterRowProps> = ({ char, index }) => {
             </div>
           </div>
         </td>
-        <td className="hidden sm:flex items-center justify-center">
-          <div className="flex space-x-2 h-full">
+        <td className="hidden sm:table-cell border border-gray-300">
+          <div className="flex items-center justify-center space-x-2">
             <img
               src={CLASS_ICONS[char.characterClass]}
               alt={char.characterClass}

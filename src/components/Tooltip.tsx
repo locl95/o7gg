@@ -288,7 +288,7 @@ export const TooltipWowItem: React.FC<TooltipWowItemProps> = ({
       <img
         src={item?.icon || `/icons/gear/${fallback}.webp`}
         alt={item?.name || fallback}
-        className={`w-[56px] h-[56px] object-contain rounded-lg shadow-sm border-4 ${borderColor}`}
+        className={`w-[56px] h-auto object-contain rounded-lg shadow-sm border-4 ${borderColor}`}
       />
     </TooltipMobile>
   ) : (

@@ -5,6 +5,7 @@ import LevelCell from "./LevelCell";
 import { useState } from "react";
 import ExpandedCharacterRow from "./ExpandedCharacterRow";
 import OpenRowButton from "./OpenRowButton";
+import ExpandedCharacterMobile from "./ExpandedCharacterMobile";
 import { Tooltip } from "./Tooltip";
 
 interface CharacterRowProps {
@@ -29,20 +30,18 @@ const CharacterRow: React.FC<CharacterRowProps> = ({ char, index }) => {
         tabIndex={0}
         role="button"
       >
-        <td className="border border-gray-300 px-4 py-2 align-middle">
+        <td className="hidden sm:table-cell border border-gray-300">
           <img
             src={char.avatar}
             alt="Character Avatar"
             className="w-16 h-16 mx-auto"
           />
         </td>
-        <td className="border border-gray-300 px-4 py-2">
+        <td className="border border-gray-300 px-4 py-4">
           <div className="flex justify-between items-center space-x-2">
             <div className="flex space-x-2">
-              {/* Left side: Name, Guild, and Realm */}
               <div className="flex flex-col items-start space-y-1">
-                {/* Character Name + Guild */}
-                <div className="flex items-center space-x-2">
+                <div className="flex flex-wrap gap-x-2 items-center">
                   <span className="text-lg font-bold">{char.name}</span>
                   {char.guild && (
                     <span className="text-sm text-gray-500">
@@ -50,16 +49,30 @@ const CharacterRow: React.FC<CharacterRowProps> = ({ char, index }) => {
                     </span>
                   )}
                 </div>
-                <div className="flex justify-between space-x-2">
-                  {/* Realm */}
+                <div className="flex items-center justify-between space-x-2">
                   <span className="text-sm text-gray-500">
                     ({char.region.toUpperCase()}) {char.realm}
                   </span>
+                  <div className="flex sm:hidden items-center space-x-2">
+                    {char.isSelfFound && (
+                      <img
+                        src="/icons/ssf.jpg"
+                        alt="SSF Icon"
+                        className="w-8 h-8"
+                      />
+                    )}
+                    {char.isDead && (
+                      <img
+                        src="/icons/rip.svg"
+                        alt="Tombstone Icon"
+                        className="w-8 h-8"
+                      />
+                    )}
+                  </div>
                 </div>
               </div>
 
-              {/* Right side: Icons */}
-              <div className="flex items-center space-x-2">
+              <div className="hidden sm:flex items-center space-x-2">
                 {char.isSelfFound && (
                   <Tooltip
                     offset={{ x: 10, y: -40 }}
@@ -91,8 +104,7 @@ const CharacterRow: React.FC<CharacterRowProps> = ({ char, index }) => {
                 )}
               </div>
             </div>
-            {/* Last Logged In*/}
-            <div className="flex flex-col text-right text-sm text-gray-500">
+            <div className="hidden sm:flex flex-col text-right text-sm text-gray-500">
               <span>Last logged in</span>
               <span>
                 {new Date(char.lastLogin).toLocaleString("en-GB", {
@@ -107,8 +119,8 @@ const CharacterRow: React.FC<CharacterRowProps> = ({ char, index }) => {
             </div>
           </div>
         </td>
-        <td className="border border-gray-300">
-          <div className="flex items-center justify-center space-x-2 h-full">
+        <td className="hidden sm:table-cell border border-gray-300">
+          <div className="flex items-center justify-center space-x-2">
             <img
               src={CLASS_ICONS[char.characterClass]}
               alt={char.characterClass}
@@ -124,7 +136,8 @@ const CharacterRow: React.FC<CharacterRowProps> = ({ char, index }) => {
         <LevelCell char={char} index={index} />
         <OpenRowButton isOpen={isOpen} />
       </tr>
-      {isOpen && <ExpandedCharacterRow char={char}></ExpandedCharacterRow>}
+      {isOpen && <ExpandedCharacterMobile char={char} />}
+      {isOpen && <ExpandedCharacterRow char={char} />}
     </>
   );
 };

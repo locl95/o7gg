@@ -78,6 +78,64 @@ export const Tooltip: React.FC<TooltipProps> = ({
   );
 };
 
+export const TooltipMobile: React.FC<TooltipProps> = ({
+  children,
+  content,
+}) => {
+  const [show, setShow] = React.useState(false);
+  const childRef = React.useRef<HTMLDivElement>(null);
+
+  const toggleTooltip = () => {
+    setShow((prev) => {
+      if (!prev) {
+        document.addEventListener("mousedown", handleClickOutside);
+        window.addEventListener("scroll", handleScroll);
+      }
+      return !prev;
+    });
+  };
+
+  const handleClickOutside = () => {
+    setShow(false);
+    document.removeEventListener("mousedown", handleClickOutside);
+  };
+
+  const handleScroll = () => {
+    setShow(false);
+    window.removeEventListener("scroll", handleScroll);
+  };
+
+  return (
+    <>
+      <div ref={childRef} onClick={toggleTooltip}>
+        {children}
+      </div>
+      {createPortal(
+        show && (
+          <>
+            <div
+              className="fixed top-0 left-0 w-full h-full bg-white"
+              style={{ opacity: 0.4, zIndex: 999 }}
+            ></div>
+            <div
+              className="fixed bg-black text-white p-2 rounded-lg"
+              style={{
+                top: "30%",
+                left: "30%",
+                transform: "translate(-20%, -20%)",
+                zIndex: 1000,
+              }}
+            >
+              {content}
+            </div>
+          </>
+        ),
+        document.body
+      )}
+    </>
+  );
+};
+
 interface TooltipWowItemProps {
   item: WowItem;
   fallback: string;
@@ -87,6 +145,21 @@ export const TooltipWowItem: React.FC<TooltipWowItemProps> = ({
   item,
   fallback,
 }) => {
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    handleResize(); // Check initial window size
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const qualityBorderColor: { [key: string]: string } = {
     Poor: "border-gray-500",
     Common: "border-white",
@@ -166,55 +239,60 @@ export const TooltipWowItem: React.FC<TooltipWowItemProps> = ({
     return enchantment;
   };
 
-  return (
-    <Tooltip
-      offset={{ x: 10, y: -40 }}
-      content={
-        <div className="flex flex-col bg-black text-white py-1 px-2 rounded-lg max-w-sm">
-          <span className={`block ${nameColor}`}>{item.name}</span>
-          <span className="text-yellow-400">Item level {item.level}</span>
-          <span>{item.binding}</span>
-          <div className="flex justify-between">
-            <span>{item.slot}</span>
-            {item.itemSubclass !== "Miscellaneous" && (
-              <span>{item.itemSubclass}</span>
-            )}
+  const content = (
+    <div className="flex flex-col bg-black text-white py-1 px-2 rounded-lg max-w-sm">
+      <span className={`block ${nameColor}`}>{item.name}</span>
+      <span className="text-yellow-400">Item level {item.level}</span>
+      <span>{item.binding}</span>
+      <div className="flex justify-between">
+        <span>{item.slot}</span>
+        {item.itemSubclass !== "Miscellaneous" && (
+          <span>{item.itemSubclass}</span>
+        )}
+      </div>
+      {item.weaponStats && (
+        <div className="flex flex-col">
+          <div className="flex justify-between space-x-6">
+            <span>{item.weaponStats.damage}</span>
+            <span>{item.weaponStats.attackSpeed}</span>
           </div>
-          {item.weaponStats && (
-            <div className="flex flex-col">
-              <div className="flex justify-between space-x-6">
-                <span>{item.weaponStats.damage}</span>
-                <span>{item.weaponStats.attackSpeed}</span>
-              </div>
-              <span>{item.weaponStats.dps}</span>
-            </div>
-          )}
-          <span>{item.armor}</span>
-          <div className="flex flex-col">
-            {item.stats.map((stat, index) => (
-              <div key={index}>{stat}</div>
-            ))}
-          </div>
-          <div className="flex flex-col text-green-500">
-            {item.enchantments.map((ench, index) => (
-              <div key={index}>{formatEnchantment(ench)}</div>
-            ))}
-          </div>
-          <span>{item.durability}</span>
-          <span>
-            {item.requiredLevel === 0
-              ? ""
-              : `Requires Level ${item.requiredLevel}`}
-          </span>
-          <div className="flex flex-col text-green-500">
-            {item.spells.map((spell, index) => (
-              <div key={index}>{spell}</div>
-            ))}
-          </div>
-          <span>{item.sellPrice ? formatSellPrice(item.sellPrice) : ""}</span>
+          <span>{item.weaponStats.dps}</span>
         </div>
-      }
-    >
+      )}
+      <span>{item.armor}</span>
+      <div className="flex flex-col">
+        {item.stats.map((stat, index) => (
+          <div key={index}>{stat}</div>
+        ))}
+      </div>
+      <div className="flex flex-col text-green-500">
+        {item.enchantments.map((ench, index) => (
+          <div key={index}>{formatEnchantment(ench)}</div>
+        ))}
+      </div>
+      <span>{item.durability}</span>
+      <span>
+        {item.requiredLevel === 0 ? "" : `Requires Level ${item.requiredLevel}`}
+      </span>
+      <div className="flex flex-col text-green-500">
+        {item.spells.map((spell, index) => (
+          <div key={index}>{spell}</div>
+        ))}
+      </div>
+      <span>{item.sellPrice ? formatSellPrice(item.sellPrice) : ""}</span>
+    </div>
+  );
+
+  return isMobile ? (
+    <TooltipMobile offset={{ x: 0, y: 0 }} content={content}>
+      <img
+        src={item?.icon || `/icons/gear/${fallback}.webp`}
+        alt={item?.name || fallback}
+        className={`w-[56px] h-auto object-contain rounded-lg shadow-sm border-4 ${borderColor}`}
+      />
+    </TooltipMobile>
+  ) : (
+    <Tooltip offset={{ x: 10, y: -40 }} content={content}>
       <img
         src={item?.icon || `/icons/gear/${fallback}.webp`}
         alt={item?.name || fallback}

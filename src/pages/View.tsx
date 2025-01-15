@@ -6,6 +6,7 @@ import WoWTitle from "../components/ViewName";
 import Footer from "../components/Footer";
 import Loading from "../components/Loading";
 import Error from "./Error";
+import ClassFilter from "../components/ClassFilter";
 
 type SellPrice = {
   readonly header: string;
@@ -307,6 +308,7 @@ export class Character {
 const View: React.FC = () => {
   const [characters, setCharacters] = useState<Character[]>([]);
   const [viewName, setViewName] = useState<string | undefined>(undefined);
+  const [selectedClasses, setSelectedClasses] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<BackendError>();
   const { viewId } = useParams();
@@ -349,7 +351,13 @@ const View: React.FC = () => {
             />
           </div>
         )}
-        <CharacterTable characters={characters}></CharacterTable>
+        <div className="justify-self-end">
+          <ClassFilter onClassSelect={setSelectedClasses} />
+        </div>
+        <CharacterTable
+          characters={characters}
+          selectedClasses={selectedClasses}
+        />
       </div>
       <Footer />
     </div>

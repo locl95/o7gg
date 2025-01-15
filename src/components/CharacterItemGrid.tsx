@@ -43,7 +43,6 @@ const CharacterItemGrid: React.FC<CharacterItemGridProps> = ({ char }) => {
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 p-4">
-        {/* Left Side Equipment */}
         <div className="grid grid-cols-5 sm:flex flex-col flex-wrap gap-4 sm:order-none order-1">
           <CharacterItemSlot
             item={char.items.find((item) => item.slot === "Head")}
@@ -87,7 +86,6 @@ const CharacterItemGrid: React.FC<CharacterItemGridProps> = ({ char }) => {
           />
         </div>
 
-        {/* Character Stats */}
         <div className="flex flex-col sm:col-span-2 order-3 sm:order-none sm:grid grid-cols-2 gap-4">
           <CharacterCoreStats stats={char.stats} />
           <CharacterOffensiveStats stats={char.stats} />
@@ -96,7 +94,6 @@ const CharacterItemGrid: React.FC<CharacterItemGridProps> = ({ char }) => {
           <CharacterResistancesStats stats={char.stats} />
         </div>
 
-        {/* Right Side Equipment */}
         <div className="grid grid-cols-5 sm:flex flex-col flex-wrap gap-4 sm:order-none order-2">
           <CharacterItemSlot
             item={char.items.find((item) => item.slot === "Hands")}

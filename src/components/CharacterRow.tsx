@@ -40,9 +40,7 @@ const CharacterRow: React.FC<CharacterRowProps> = ({ char, index }) => {
         <td className="border border-gray-300 px-4 py-4">
           <div className="flex justify-between items-center space-x-2">
             <div className="flex space-x-2">
-              {/* Left side: Name, Guild, and Realm */}
               <div className="flex flex-col items-start space-y-1">
-                {/* Character Name + Guild */}
                 <div className="flex flex-wrap gap-x-2 items-center">
                   <span className="text-lg font-bold">{char.name}</span>
                   {char.guild && (
@@ -52,11 +50,9 @@ const CharacterRow: React.FC<CharacterRowProps> = ({ char, index }) => {
                   )}
                 </div>
                 <div className="flex items-center justify-between space-x-2">
-                  {/* Realm */}
                   <span className="text-sm text-gray-500">
                     ({char.region.toUpperCase()}) {char.realm}
                   </span>
-                  {/* Mobile Icons */}
                   <div className="flex sm:hidden items-center space-x-2">
                     {char.isSelfFound && (
                       <img
@@ -76,7 +72,6 @@ const CharacterRow: React.FC<CharacterRowProps> = ({ char, index }) => {
                 </div>
               </div>
 
-              {/* Right side: Icons */}
               <div className="hidden sm:flex items-center space-x-2">
                 {char.isSelfFound && (
                   <Tooltip
@@ -109,7 +104,6 @@ const CharacterRow: React.FC<CharacterRowProps> = ({ char, index }) => {
                 )}
               </div>
             </div>
-            {/* Last Logged In*/}
             <div className="hidden sm:flex flex-col text-right text-sm text-gray-500">
               <span>Last logged in</span>
               <span>

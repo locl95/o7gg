@@ -336,9 +336,13 @@ const View: React.FC = () => {
     <div className="flex flex-col min-h-screen bg-gray-200">
       <div className="grid-cols-3 flex-grow">
         {viewName && (
-          <div className="flex items-center justify-between p-2 h-20">
+          <div className="flex items-center justify-between p-2 h-20 bg-gray-800">
             <Link to={"/"} className="h-full">
-              <img src="/icons/o7gg.png" alt="o7gg" className="h-16 min-w-16" />
+              <img
+                src="/icons/o7gg.png"
+                alt="o7gg"
+                className="h-16 min-w-16 rounded-lg"
+              />
             </Link>
             <WoWTitle
               title={viewName}
@@ -347,7 +351,7 @@ const View: React.FC = () => {
             <img
               src="/icons/kosgg.jpeg"
               alt="kosgg"
-              className="h-16 min-w-16"
+              className="h-16 min-w-16 rounded-lg"
             />
           </div>
         )}

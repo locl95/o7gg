@@ -47,6 +47,7 @@ const ClassFilter: React.FC<ClassFilterProps> = ({ onClassSelect }) => {
                 : "w-8 h-8 filter grayscale opacity-50"
             }
             onClick={() => toggleFilter(className)}
+            role="button"
           />
         ))}
       </div>

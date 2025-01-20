@@ -355,7 +355,7 @@ const View: React.FC = () => {
             />
           </div>
         )}
-        <div className="justify-self-end">
+        <div className="flex justify-end">
           <ClassFilter onClassSelect={setSelectedClasses} />
         </div>
         <CharacterTable

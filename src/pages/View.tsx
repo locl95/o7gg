@@ -6,6 +6,7 @@ import WoWTitle from "../components/ViewName";
 import Footer from "../components/Footer";
 import Loading from "../components/Loading";
 import Error from "./Error";
+import ClassFilter from "../components/ClassFilter";
 
 type SellPrice = {
   readonly header: string;
@@ -307,6 +308,7 @@ export class Character {
 const View: React.FC = () => {
   const [characters, setCharacters] = useState<Character[]>([]);
   const [viewName, setViewName] = useState<string | undefined>(undefined);
+  const [selectedClasses, setSelectedClasses] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<BackendError>();
   const { viewId } = useParams();
@@ -334,9 +336,13 @@ const View: React.FC = () => {
     <div className="flex flex-col min-h-screen bg-gray-200">
       <div className="grid-cols-3 flex-grow">
         {viewName && (
-          <div className="flex items-center justify-between p-2 h-20">
+          <div className="flex items-center justify-between p-2 h-20 bg-gray-800">
             <Link to={"/"} className="h-full">
-              <img src="/icons/o7gg.png" alt="o7gg" className="h-16 min-w-16" />
+              <img
+                src="/icons/o7gg.png"
+                alt="o7gg"
+                className="h-16 min-w-16 rounded-lg"
+              />
             </Link>
             <WoWTitle
               title={viewName}
@@ -345,11 +351,17 @@ const View: React.FC = () => {
             <img
               src="/icons/kosgg.jpeg"
               alt="kosgg"
-              className="h-16 min-w-16"
+              className="h-16 min-w-16 rounded-lg"
             />
           </div>
         )}
-        <CharacterTable characters={characters}></CharacterTable>
+        <div className="flex justify-end">
+          <ClassFilter onClassSelect={setSelectedClasses} />
+        </div>
+        <CharacterTable
+          characters={characters}
+          selectedClasses={selectedClasses}
+        />
       </div>
       <Footer />
     </div>

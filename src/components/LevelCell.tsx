@@ -23,7 +23,8 @@ const LevelCell: React.FC<LevelCellProps> = ({ char }) => {
               className="h-2 rounded-full"
               style={{
                 width: `${progress}%`,
-                background: "linear-gradient(to bottom, #750970, #4c0949)",
+                background:
+                  "linear-gradient(to bottom, #750970 50%, #4c0949 50%)",
               }}
             ></div>
           </div>

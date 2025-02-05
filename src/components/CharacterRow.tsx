@@ -30,7 +30,7 @@ const CharacterRow: React.FC<CharacterRowProps> = ({ char, index }) => {
         tabIndex={0}
         role="button"
       >
-        <td className="hidden sm:table-cell border border-gray-300">
+        <td className="hidden lg:table-cell border border-gray-300">
           <img
             src={char.avatar}
             alt="Character Avatar"
@@ -53,7 +53,7 @@ const CharacterRow: React.FC<CharacterRowProps> = ({ char, index }) => {
                   <span className="text-sm text-gray-500">
                     ({char.region.toUpperCase()}) {char.realm}
                   </span>
-                  <div className="flex sm:hidden items-center space-x-2">
+                  <div className="flex md:hidden items-center space-x-2">
                     {char.isSelfFound && (
                       <img
                         src="/icons/ssf.jpg"
@@ -72,7 +72,7 @@ const CharacterRow: React.FC<CharacterRowProps> = ({ char, index }) => {
                 </div>
               </div>
 
-              <div className="hidden sm:flex items-center space-x-2">
+              <div className="hidden md:flex items-center space-x-2">
                 {char.isSelfFound && (
                   <Tooltip
                     offset={{ x: 10, y: -40 }}
@@ -104,7 +104,7 @@ const CharacterRow: React.FC<CharacterRowProps> = ({ char, index }) => {
                 )}
               </div>
             </div>
-            <div className="hidden sm:flex flex-col text-right text-sm text-gray-500">
+            <div className="hidden lg:flex flex-col text-right text-sm text-gray-500">
               <span>Last logged in</span>
               <span>
                 {new Date(char.lastLogin).toLocaleString("en-GB", {

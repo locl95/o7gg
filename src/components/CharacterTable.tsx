@@ -33,16 +33,14 @@ const CharacterTable: React.FC<CharacterTableProps> = ({
   const sortedCharacters = [...filteredCharacters].sort((a, b) => {
     if (!sortBy) return 0;
 
-    let result = 0;
-    if (sortBy === "class") {
-      result = a.characterClass.localeCompare(b.characterClass);
-    }
-    if (sortBy === "name") {
-      result = a.name.localeCompare(b.name);
-    }
-    if (sortBy === "level") {
-      result = a.level - b.level;
-    }
+    const result =
+      sortBy === "class"
+        ? a.characterClass.localeCompare(b.characterClass)
+        : sortBy === "name"
+        ? a.name.localeCompare(b.name)
+        : sortBy === "level"
+        ? a.level - b.level
+        : 0;
 
     return sortOrder === "asc" ? result : -result;
   });

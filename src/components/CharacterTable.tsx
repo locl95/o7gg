@@ -36,8 +36,8 @@ const CharacterTable: React.FC<CharacterTableProps> = ({
     const result =
       sortBy === "class"
         ? a.characterClass.localeCompare(b.characterClass)
-        : sortBy === "name"
-        ? a.name.localeCompare(b.name)
+        : sortBy === "lastLogin"
+        ? new Date(a.lastLogin).getTime() - new Date(b.lastLogin).getTime()
         : sortBy === "level"
         ? a.level - b.level
         : 0;
@@ -51,7 +51,7 @@ const CharacterTable: React.FC<CharacterTableProps> = ({
         <thead className="bg-gray-100 border border-gray-300">
           <tr>
             <th />
-            {["name", "class", "level"].map((key) => (
+            {["lastLogin", "class", "level"].map((key) => (
               <th
                 key={key}
                 className="text-right px-2 cursor-pointer border border-gray-300"

@@ -12,6 +12,7 @@ const SearchName: React.FC<SearchNameProps> = ({
 }) => {
   const [inputName, setInputName] = useState<string>("");
   const [suggestions, setSuggestions] = useState<Character[]>([]);
+  const [selectedIndex, setSelectedIndex] = useState<number>(-1);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -22,8 +23,10 @@ const SearchName: React.FC<SearchNameProps> = ({
         char.name.toLowerCase().startsWith(value.toLowerCase())
       );
       setSuggestions(filtered);
+      setSelectedIndex(-1);
     } else {
       setSuggestions([]);
+      setSelectedIndex(-1);
       onCharacterSelect(undefined);
     }
   };
@@ -31,13 +34,35 @@ const SearchName: React.FC<SearchNameProps> = ({
   const handleSuggestionClick = (character: Character) => {
     setInputName(character.name);
     setSuggestions([]);
+    setSelectedIndex(-1);
     onCharacterSelect(character);
   };
 
   const handleEmptySelection = () => {
     setInputName("");
     setSuggestions([]);
+    setSelectedIndex(-1);
     onCharacterSelect(undefined);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (suggestions.length === 0) return;
+
+    if (e.key === "ArrowDown") {
+      setSelectedIndex((prevIndex) =>
+        prevIndex < suggestions.length - 1 ? prevIndex + 1 : prevIndex
+      );
+    } else if (e.key === "ArrowUp") {
+      setSelectedIndex((prevIndex) =>
+        prevIndex > 0 ? prevIndex - 1 : prevIndex
+      );
+    } else if (e.key === "Enter") {
+      if (selectedIndex >= 0) {
+        handleSuggestionClick(suggestions[selectedIndex]);
+      } else if (suggestions.length === 1) {
+        handleSuggestionClick(suggestions[0]);
+      }
+    }
   };
 
   return (
@@ -46,6 +71,7 @@ const SearchName: React.FC<SearchNameProps> = ({
         className="m-2 px-2 w-72 h-8 border border-gray-300"
         type="text"
         onChange={handleInputChange}
+        onKeyDown={handleKeyDown}
         value={inputName}
         placeholder="Search character..."
       />
@@ -59,10 +85,12 @@ const SearchName: React.FC<SearchNameProps> = ({
       )}
       {suggestions.length > 0 && (
         <div className="absolute bg-white border border-gray-300 w-72 mt-11 ml-2 shadow-md max-h-40 overflow-auto">
-          {suggestions.map((char) => (
+          {suggestions.map((char, index) => (
             <div
               key={char.id}
-              className="cursor-pointer px-2 py-1 hover:bg-gray-200"
+              className={`cursor-pointer px-2 py-1 ${
+                index === selectedIndex ? "bg-gray-200" : "hover:bg-gray-200"
+              }`}
               onClick={() => handleSuggestionClick(char)}
             >
               {char.name}

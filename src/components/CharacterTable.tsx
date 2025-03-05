@@ -54,7 +54,9 @@ const CharacterTable: React.FC<CharacterTableProps> = ({
             {["lastLogin", "class", "level"].map((key) => (
               <th
                 key={key}
-                className="text-right px-2 cursor-pointer border border-gray-300"
+                className={`text-right px-2 cursor-pointer border border-gray-300 ${
+                  key === "level" ? "hidden sm:table-cell" : ""
+                } ${key === "lastLogin" ? "hidden lg:table-cell" : ""}`}
                 onClick={() => handleSort(key)}
               >
                 <span

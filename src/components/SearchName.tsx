@@ -1,68 +1,12 @@
-import { useState } from "react";
-import { Character } from "../pages/View";
+import { ChangeEvent } from "react";
 
 interface SearchNameProps {
-  characters: Character[];
-  onCharacterSelect: (character: Character | undefined) => void;
+  setSearchQuery: (query: string) => void;
 }
 
-const SearchName: React.FC<SearchNameProps> = ({
-  characters,
-  onCharacterSelect,
-}) => {
-  const [inputName, setInputName] = useState<string>("");
-  const [suggestions, setSuggestions] = useState<Character[]>([]);
-  const [selectedIndex, setSelectedIndex] = useState<number>(-1);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setInputName(value);
-
-    if (value.length >= 2) {
-      const filtered = characters.filter((char) =>
-        char.name.toLowerCase().startsWith(value.toLowerCase())
-      );
-      setSuggestions(filtered);
-      setSelectedIndex(-1);
-    } else {
-      setSuggestions([]);
-      setSelectedIndex(-1);
-      onCharacterSelect(undefined);
-    }
-  };
-
-  const handleSuggestionClick = (character: Character) => {
-    setInputName(character.name);
-    setSuggestions([]);
-    setSelectedIndex(-1);
-    onCharacterSelect(character);
-  };
-
-  const handleEmptySelection = () => {
-    setInputName("");
-    setSuggestions([]);
-    setSelectedIndex(-1);
-    onCharacterSelect(undefined);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (suggestions.length === 0) return;
-
-    if (e.key === "ArrowDown") {
-      setSelectedIndex((prevIndex) =>
-        prevIndex < suggestions.length - 1 ? prevIndex + 1 : prevIndex
-      );
-    } else if (e.key === "ArrowUp") {
-      setSelectedIndex((prevIndex) =>
-        prevIndex > 0 ? prevIndex - 1 : prevIndex
-      );
-    } else if (e.key === "Enter") {
-      if (selectedIndex >= 0) {
-        handleSuggestionClick(suggestions[selectedIndex]);
-      } else if (suggestions.length === 1) {
-        handleSuggestionClick(suggestions[0]);
-      }
-    }
+const SearchName: React.FC<SearchNameProps> = ({ setSearchQuery }) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
   };
 
   return (
@@ -71,33 +15,8 @@ const SearchName: React.FC<SearchNameProps> = ({
         className="m-2 px-2 w-72 h-8 border border-gray-300"
         type="text"
         onChange={handleInputChange}
-        onKeyDown={handleKeyDown}
-        value={inputName}
         placeholder="Search character..."
       />
-      {inputName && (
-        <button
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-black"
-          onClick={handleEmptySelection}
-        >
-          ✕
-        </button>
-      )}
-      {suggestions.length > 0 && (
-        <div className="absolute bg-white border border-gray-300 w-72 mt-11 ml-2 shadow-md max-h-40 overflow-auto">
-          {suggestions.map((char, index) => (
-            <div
-              key={char.id}
-              className={`cursor-pointer px-2 py-1 ${
-                index === selectedIndex ? "bg-gray-200" : "hover:bg-gray-200"
-              }`}
-              onClick={() => handleSuggestionClick(char)}
-            >
-              {char.name}
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   );
 };

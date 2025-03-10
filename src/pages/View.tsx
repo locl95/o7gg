@@ -310,9 +310,7 @@ const View: React.FC = () => {
   const [characters, setCharacters] = useState<Character[]>([]);
   const [viewName, setViewName] = useState<string | undefined>(undefined);
   const [selectedClasses, setSelectedClasses] = useState<string[]>([]);
-  const [selectedCharacter, setSelectedCharacter] = useState<
-    Character | undefined
-  >(undefined);
+  const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<BackendError>();
   const { viewId } = useParams();
@@ -360,14 +358,15 @@ const View: React.FC = () => {
           </div>
         )}
         <div className="flex flex-col items-center sm:flex-row sm:justify-between">
-          <SearchName
-            characters={characters}
-            onCharacterSelect={setSelectedCharacter}
-          />
+          <SearchName setSearchQuery={setSearchQuery} />
           <ClassFilter onClassSelect={setSelectedClasses} />
         </div>
         <CharacterTable
-          characters={selectedCharacter ? [selectedCharacter] : characters}
+          characters={
+            characters.filter((char) =>
+              char.name.toLowerCase().includes(searchQuery.toLowerCase())
+            ) || characters
+          }
           selectedClasses={selectedClasses}
         />
       </div>

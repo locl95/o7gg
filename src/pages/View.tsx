@@ -7,6 +7,7 @@ import Footer from "../components/Footer";
 import Loading from "../components/Loading";
 import Error from "./Error";
 import ClassFilter from "../components/ClassFilter";
+import CompareCharacter from "../components/CompareCharacter";
 
 type SellPrice = {
   readonly header: string;
@@ -311,6 +312,9 @@ const View: React.FC = () => {
   const [selectedClasses, setSelectedClasses] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<BackendError>();
+  const [selectedForComparison, setSelectedForComparison] = useState<
+    Character[] | null
+  >(null);
   const { viewId } = useParams();
 
   useEffect(() => {
@@ -334,36 +338,46 @@ const View: React.FC = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-200">
-      <div className="grid-cols-3 flex-grow">
-        {viewName && (
-          <div className="flex items-center justify-between p-2 h-20 bg-gray-800">
-            <Link to={"/"} className="h-full">
-              <img
-                src="/icons/o7gg.png"
-                alt="o7gg"
-                className="h-16 min-w-16 rounded-lg"
-              />
-            </Link>
-            <WoWTitle
-              title={viewName}
-              className={"text-4xl sm:text-5xl text-center"}
-            />
-            <img
-              src="/icons/kosgg.jpeg"
-              alt="kosgg"
-              className="h-16 min-w-16 rounded-lg"
+      {selectedForComparison ? (
+        <CompareCharacter
+          characters={selectedForComparison}
+          onClose={() => setSelectedForComparison(null)}
+        />
+      ) : (
+        <>
+          <div className="grid-cols-3 flex-grow">
+            {viewName && (
+              <div className="flex items-center justify-between p-2 h-20 bg-gray-800">
+                <Link to={"/"} className="h-full">
+                  <img
+                    src="/icons/o7gg.png"
+                    alt="o7gg"
+                    className="h-16 min-w-16 rounded-lg"
+                  />
+                </Link>
+                <WoWTitle
+                  title={viewName}
+                  className={"text-4xl sm:text-5xl text-center"}
+                />
+                <img
+                  src="/icons/kosgg.jpeg"
+                  alt="kosgg"
+                  className="h-16 min-w-16 rounded-lg"
+                />
+              </div>
+            )}
+            <div className="flex justify-end">
+              <ClassFilter onClassSelect={setSelectedClasses} />
+            </div>
+            <CharacterTable
+              characters={characters}
+              selectedClasses={selectedClasses}
+              onCompare={setSelectedForComparison}
             />
           </div>
-        )}
-        <div className="flex justify-end">
-          <ClassFilter onClassSelect={setSelectedClasses} />
-        </div>
-        <CharacterTable
-          characters={characters}
-          selectedClasses={selectedClasses}
-        />
-      </div>
-      <Footer />
+          <Footer />
+        </>
+      )}
     </div>
   );
 };

@@ -5,14 +5,18 @@ import CharacterRow from "./CharacterRow";
 interface CharacterTableProps {
   characters: Character[];
   selectedClasses: string[];
+  onCompare: (selectedCharacters: Character[]) => void;
 }
 
 const CharacterTable: React.FC<CharacterTableProps> = ({
   characters,
   selectedClasses,
+  onCompare,
 }) => {
   const [sortBy, setSortBy] = useState<string | null>(null);
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+  const [selectedCharacters, setSelectedCharacters] = useState<Character[]>([]);
+  const [isSelecting, setIsSelecting] = useState(false);
 
   const handleSort = (key: string) => {
     if (sortBy === key) {
@@ -21,6 +25,18 @@ const CharacterTable: React.FC<CharacterTableProps> = ({
       setSortBy(key);
       setSortOrder("asc");
     }
+  };
+
+  const toggleSelection = (char: Character) => {
+    setSelectedCharacters((prev) => {
+      if (prev.includes(char)) {
+        return prev.filter((c) => c.id !== char.id);
+      }
+      if (prev.length < 2) {
+        return [...prev, char];
+      }
+      return prev;
+    });
   };
 
   const filteredCharacters =
@@ -71,10 +87,36 @@ const CharacterTable: React.FC<CharacterTableProps> = ({
         </thead>
         <tbody>
           {sortedCharacters.map((char, index) => (
-            <CharacterRow key={char.id} char={char} index={index} />
+            <CharacterRow
+              key={char.id}
+              char={char}
+              index={index}
+              isSelecting={isSelecting}
+              isSelected={selectedCharacters.includes(char)}
+              onSelect={toggleSelection}
+            />
           ))}
         </tbody>
       </table>
+      <div className="flex justify-center m-2 gap-2 align-center">
+        <button
+          onClick={() => {
+            setIsSelecting((prev) => !prev);
+            setSelectedCharacters([]);
+          }}
+          className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+        >
+          {isSelecting ? "Cancel" : "Compare Characters"}
+        </button>
+        {isSelecting && selectedCharacters.length === 2 && (
+          <button
+            onClick={() => onCompare(selectedCharacters)}
+            className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
+          >
+            Compare
+          </button>
+        )}
+      </div>
     </div>
   );
 };

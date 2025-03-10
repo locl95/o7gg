@@ -37,13 +37,29 @@ const CharacterItemSlot: React.FC<CharacterItemSlotProps> = ({
 
 interface CharacterItemGridProps {
   char: Character;
+  showStats?: boolean;
 }
 
-const CharacterItemGrid: React.FC<CharacterItemGridProps> = ({ char }) => {
+const CharacterItemGrid: React.FC<CharacterItemGridProps> = ({
+  char,
+  showStats = true,
+}) => {
   return (
     <>
-      <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 p-4">
-        <div className="grid grid-cols-5 sm:flex flex-col flex-wrap gap-4 sm:order-none order-1">
+      <div
+        className={`${
+          showStats
+            ? "grid grid-cols-1 sm:grid-cols-4 gap-4"
+            : "flex flex-wrap justify-center"
+        } p-4`}
+      >
+        <div
+          className={`${
+            showStats
+              ? "grid grid-cols-5 sm:flex flex-col flex-wrap gap-4"
+              : "flex justify-between"
+          } sm:order-none order-1`}
+        >
           <CharacterItemSlot
             item={char.items.find((item) => item.slot === "Head")}
             fallback={"head"}
@@ -86,15 +102,23 @@ const CharacterItemGrid: React.FC<CharacterItemGridProps> = ({ char }) => {
           />
         </div>
 
-        <div className="flex flex-col sm:col-span-2 order-3 sm:order-none sm:grid grid-cols-2 gap-4">
-          <CharacterCoreStats stats={char.stats} />
-          <CharacterOffensiveStats stats={char.stats} />
-          <CharacterDefensiveStats stats={char.stats} />
-          <CharacterResourcesStats stats={char.stats} />
-          <CharacterResistancesStats stats={char.stats} />
-        </div>
+        {showStats && (
+          <div className="flex flex-col sm:col-span-2 order-3 sm:order-none sm:grid grid-cols-2 gap-4">
+            <CharacterCoreStats stats={char.stats} />
+            <CharacterOffensiveStats stats={char.stats} />
+            <CharacterDefensiveStats stats={char.stats} />
+            <CharacterResourcesStats stats={char.stats} />
+            <CharacterResistancesStats stats={char.stats} />
+          </div>
+        )}
 
-        <div className="grid grid-cols-5 sm:flex flex-col flex-wrap gap-4 sm:order-none order-2">
+        <div
+          className={`${
+            showStats
+              ? "grid grid-cols-5 sm:flex flex-col flex-wrap gap-4"
+              : "flex justify-between"
+          } sm:order-none order-1`}
+        >
           <CharacterItemSlot
             item={char.items.find((item) => item.slot === "Hands")}
             fallback={"hands"}

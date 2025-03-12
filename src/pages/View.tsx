@@ -7,6 +7,7 @@ import Footer from "../components/Footer";
 import Loading from "../components/Loading";
 import Error from "./Error";
 import ClassFilter from "../components/ClassFilter";
+import SearchName from "../components/SearchName";
 
 type SellPrice = {
   readonly header: string;
@@ -309,6 +310,7 @@ const View: React.FC = () => {
   const [characters, setCharacters] = useState<Character[]>([]);
   const [viewName, setViewName] = useState<string | undefined>(undefined);
   const [selectedClasses, setSelectedClasses] = useState<string[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<BackendError>();
   const { viewId } = useParams();
@@ -355,11 +357,16 @@ const View: React.FC = () => {
             />
           </div>
         )}
-        <div className="flex justify-end">
+        <div className="flex flex-col items-center sm:flex-row sm:justify-between">
+          <SearchName setSearchQuery={setSearchQuery} />
           <ClassFilter onClassSelect={setSelectedClasses} />
         </div>
         <CharacterTable
-          characters={characters}
+          characters={
+            characters.filter((char) =>
+              char.name.toLowerCase().includes(searchQuery.toLowerCase())
+            ) || characters
+          }
           selectedClasses={selectedClasses}
         />
       </div>

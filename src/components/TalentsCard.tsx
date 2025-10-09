@@ -3,11 +3,19 @@ import { Character } from "../pages/View";
 
 interface WowHeadTalentsProps {
   char: Character;
+  small?: boolean;
 }
 
-export const WowHeadTalents: React.FC<WowHeadTalentsProps> = ({ char }) => {
+export const WowHeadTalents: React.FC<WowHeadTalentsProps> = ({
+  char,
+  small,
+}) => {
   return (
-    <div className="sm:flex justify-center h-[530px] overflow-x-auto sm:overflow-visible">
+    <div
+      className={`sm:flex justify-center overflow-x-auto sm:overflow-visible ${
+        small ? "h-[430px]" : "h-[530px]"
+      }`}
+    >
       <iframe
         src={`https://www.wowhead.com/classic/en/talent-calc/embed/${char.characterClass.toLowerCase()}/${
           char.specializations.wowHeadEmbeddedTalents

@@ -14,7 +14,7 @@ export const RACE_ICONS: Record<string, string> = {
   Human: "/icons/race/human.webp",
   Orc: "/icons/race/orc.webp",
   "Night Elf": "/icons/race/nightelf.webp",
-  Forsaken: "/icons/forsaken.webp",
+  Undead: "/icons/forsaken.webp",
   Tauren: "/icons/race/tauren.webp",
   Gnome: "/icons/race/gnome.webp",
   Troll: "/icons/race/troll.webp",

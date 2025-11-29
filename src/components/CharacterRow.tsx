@@ -11,22 +11,39 @@ import { Tooltip } from "./Tooltip";
 interface CharacterRowProps {
   char: Character;
   index: number;
+  isSelecting: boolean;
+  isSelected: boolean;
+  onSelect: (char: Character) => void;
 }
 
-const CharacterRow: React.FC<CharacterRowProps> = ({ char, index }) => {
+const CharacterRow: React.FC<CharacterRowProps> = ({
+  char,
+  index,
+  isSelected,
+  isSelecting,
+  onSelect,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggleRow = () => {
-    setIsOpen(!isOpen);
+  const handleClick = () => {
+    if (isSelecting) {
+      onSelect(char);
+    } else {
+      setIsOpen(!isOpen);
+    }
   };
 
-  const rowColor = char.faction === "Horde" ? "bg-red-50" : "bg-blue-50";
+  const rowColor = isSelected
+    ? "bg-yellow-300"
+    : char.faction === "Horde"
+    ? "bg-red-50"
+    : "bg-blue-50";
   return (
     <>
       <tr
         key={char.id}
         className={rowColor}
-        onClick={toggleRow}
+        onClick={handleClick}
         tabIndex={0}
         role="button"
       >
